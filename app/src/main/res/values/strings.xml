@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Randome</string>
+    <string name="activity_a">Random Text</string>
+    <string name="activity_b">Random Text</string>
+    <string name="activity_a_button">Activity A Button</string>
+    <string name="activity_b_button">Activity B Button</string>
+</resources>
