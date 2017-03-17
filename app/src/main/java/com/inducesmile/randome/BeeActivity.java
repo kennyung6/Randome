@@ -16,40 +16,48 @@ import java.util.Random;
 
 public class BeeActivity extends AppCompatActivity {
 
+    int n;
     private TextView bTxt;
     private Button bBtn;
-    int n;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Creates Activity B View
+        // Creates Activity B View
         setContentView(R.layout.activity_bee);
+
+        // Get bundle object at appropriate place in the code
+        Bundle extras = getIntent().getExtras();
+
+        // Extract data using passed keys
+        int v1 = extras.getInt("KEY2");
 
         //Binds the TextView to the Activity
         bTxt = (TextView) findViewById(R.id.bTxt);
 
-        //Function to generate random numbers
+        // Get the data and populate the result into the TextView
+        bTxt.setText(String.valueOf(v1));
+
+
+        // Function to generate random numbers
         Random random = new Random();
         // Gives n such that 0 <= n < 50
-        n= random.nextInt(50);
+        n = random.nextInt(50);
 
-        //Get the data and populate the result into the TextView
-        bTxt.setText(String.valueOf(n));
 
-        //Binds the Button to the View
+        // Binds the Button to the View
         bBtn = (Button) findViewById(R.id.bBtn);
 
-        //Goto Back to Activity A
+        // Goto Back to Activity A
         bBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intentional = new Intent(BeeActivity.this, MainActivity.class);
+                intentional.putExtra("KEY2", n);
                 startActivity(intentional);
             }
         });
-
 
 
     }

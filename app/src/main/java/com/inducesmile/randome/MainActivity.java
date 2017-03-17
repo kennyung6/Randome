@@ -15,47 +15,60 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    int n;
     private TextView aTxt;
     private Button aBtn;
-    int n;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        //Creates Activity A View
+        // Creates Activity A View
         setContentView(R.layout.activity_main);
 
-        //Binds The TextView to the Activity
+        // Binds The TextView to the Activity
         aTxt = (TextView) findViewById(R.id.aTxt);
 
-        //Function to generate random numbers
+        // Function to generate random numbers
         Random random = new Random();
         // Gives n such that 0 <= n < 50
         n = random.nextInt(50);
 
-        //Get the data and populate the result into the TextView
-        aTxt.setText(String.valueOf(n));
+        // Get Bundle object at appropriate place in the code
+        Bundle extras = getIntent().getExtras();
 
 
-        //Binds The Button to the Activity
+        // Handles null pointer exception at first launch
+        if (extras != null && aTxt != null) {
+
+            // Extract data using passed keys
+            int v2 = extras.getInt("KEY2");
+
+            // Displays the passed Value from BeeActivity
+            aTxt.setText(String.valueOf(v2));
+
+        } else {
+            // Displays a random value at first launch
+            aTxt.setText(String.valueOf(n));
+        }
+
+
+        // Binds The Button to the Activity
         aBtn = (Button) findViewById(R.id.aBtn);
 
-        //Goto Activity B
+        // Goto Activity B
         aBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intentional = new Intent(MainActivity.this, BeeActivity.class);
+                intentional.putExtra("KEY2", n);
                 startActivity(intentional);
             }
         });
 
 
     }
-
-
-
 
 
 }
